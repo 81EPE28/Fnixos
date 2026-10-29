@@ -20,17 +20,17 @@ in
     };
 
     services.cron.systab = lib.mapAttrsToList (
-      k: v:
+      _k: v:
       let
         expr = if v.interval == "hourly" then "0 0 * * *" else v.interval;
 
         user = if v.user != null then v.user else "root";
       in
       "${expr} ${user} ${v.command}"
-    ) (lib.filterAttrs (k: v: !anacronCompatible v) config.providers.scheduler.tasks);
+    ) (lib.filterAttrs (_k: v: !anacronCompatible v) config.providers.scheduler.tasks);
 
     services.anacron.systab = lib.mapAttrsToList (k: v: "@${v.interval} 0 ${k} ${v.command}") (
-      lib.filterAttrs (k: anacronCompatible) config.providers.scheduler.tasks
+      lib.filterAttrs (_k: anacronCompatible) config.providers.scheduler.tasks
     );
   };
 }

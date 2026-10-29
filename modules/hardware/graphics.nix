@@ -16,8 +16,6 @@ let
     name = "graphics-drivers-32bit";
     paths = [ cfg.package32 ] ++ cfg.extraPackages32;
   };
-
-  gidOf = name: toString config.ids.gids.${name};
 in
 {
   options.hardware.graphics = {

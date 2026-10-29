@@ -70,7 +70,7 @@ let
                   childName
                   "${childToplevel}/${filename}"
                 ]
-              ) (lib.mapAttrs (k: v: v.system.topLevel) config.specialisation);
+              ) (lib.mapAttrs (_: v: v.system.topLevel) config.specialisation);
             in
             lib.escapeShellArgs [
               "${pkgs.buildPackages.jq}/bin/jq"

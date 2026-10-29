@@ -14,7 +14,7 @@ let
       name: value:
       let
         transformedValue = lib.mapAttrs (
-          key: val:
+          _key: val:
           if lib.isList val then
             "'" + listToValue val + "'"
           else if lib.isBool val then

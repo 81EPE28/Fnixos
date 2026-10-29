@@ -13,7 +13,7 @@ let
         checkType = x: lib.isBool x || lib.isString x || lib.isInt x || x == null;
       in
       checkType val || (val._type or "" == "override" && checkType val.content);
-    merge = loc: defs: lib.mergeOneOption loc (lib.filterOverrides defs);
+    merge = _: defs: lib.mergeOneOption loc (lib.filterOverrides defs);
   };
 in
 {
@@ -22,7 +22,7 @@ in
       let
         highestValueType = lib.types.ints.unsigned // {
           merge =
-            loc: defs:
+            _: defs:
             lib.foldl (a: b: if b.value == null then null else lib.max a b.value) 0 (lib.filterOverrides defs);
         };
       in

@@ -3,7 +3,7 @@ let
   docFile = lib.types.path // {
     # Returns tuples of
     #   { file = "module location"; value = <path/to/doc.xml>; }
-    merge = loc: defs: defs;
+    merge = _loc: defs: defs;
   };
 in
 
@@ -25,7 +25,7 @@ in
 
       buildDocsInSandbox = lib.mkOption {
         type = lib.types.bool // {
-          merge = loc: defs: defs;
+          merge = _loc: defs: defs;
         };
         internal = true;
         default = true;

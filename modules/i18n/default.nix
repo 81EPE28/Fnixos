@@ -67,7 +67,7 @@
               "en_US.UTF-8"
               config.i18n.defaultLocale
             ]
-            ++ (lib.attrValues (lib.filterAttrs (n: v: n != "LANGUAGE") config.i18n.extraLocaleSettings))
+            ++ (lib.attrValues (lib.filterAttrs (n: _v: n != "LANGUAGE") config.i18n.extraLocaleSettings))
           )
       );
       defaultText = lib.literalExpression ''

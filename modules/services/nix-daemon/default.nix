@@ -60,8 +60,8 @@ let
     # workaround for https://github.com/NixOS/nix/issues/9487
     # extra-* settings must come after their non-extra counterpart
     pkgs.writeText "nix.conf" ''
-      ${mkKeyValuePairs (lib.filterAttrs (key: value: !(isExtra key)) cfg.settings)}
-      ${mkKeyValuePairs (lib.filterAttrs (key: value: isExtra key) cfg.settings)}
+      ${mkKeyValuePairs (lib.filterAttrs (key: _value: !(isExtra key)) cfg.settings)}
+      ${mkKeyValuePairs (lib.filterAttrs (key: _value: isExtra key) cfg.settings)}
     '';
 in
 {

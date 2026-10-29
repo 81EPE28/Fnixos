@@ -19,7 +19,7 @@ let
 
   format = pkgs.formats.json { };
   configFile = format.generate "userborn.json" {
-    groups = lib.mapAttrsToList (username: opts: {
+    groups = lib.mapAttrsToList (_username: opts: {
       inherit (opts)
         name
         gid
@@ -27,7 +27,7 @@ let
         ;
     }) cfg.groups;
 
-    users = lib.mapAttrsToList (username: opts: {
+    users = lib.mapAttrsToList (_username: opts: {
       inherit (opts)
         name
         uid
@@ -63,7 +63,7 @@ in
     finit.tmpfiles.rules = [
       "d /home"
     ]
-    ++ lib.mapAttrsToList (username: opts: "d ${opts.home} 0700 ${opts.name} ${opts.group}") (
+    ++ lib.mapAttrsToList (_username: opts: "d ${opts.home} 0700 ${opts.name} ${opts.group}") (
       lib.filterAttrs (
         _: opts: opts.enable && opts.createHome && opts.home != "/var/empty"
       ) config.users.users

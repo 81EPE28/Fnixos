@@ -235,8 +235,8 @@ in
             config = {
               name = lib.mkDefault name;
 
-              members = lib.mapAttrsToList (n: u: u.name) (
-                lib.filterAttrs (n: u: u.enable && lib.elem config.name u.extraGroups) cfg.users
+              members = lib.mapAttrsToList (_n: u: u.name) (
+                lib.filterAttrs (_n: u: u.enable && lib.elem config.name u.extraGroups) cfg.users
               );
             };
           }

@@ -183,7 +183,7 @@ in
               lib.concatStringsSep " " v
             else
               v
-          ) (lib.filterAttrs (k: v: v != null && v != false) attrs);
+          ) (lib.filterAttrs (_k: v: v != null && v != false) attrs);
 
         toKeyValue' = lib.generators.toKeyValue {
           mkKeyValue = k: v: if v == "" then "  ${k}" else "  ${k} ${v}";

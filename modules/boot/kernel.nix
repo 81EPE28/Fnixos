@@ -31,7 +31,7 @@
       apply =
         kernelPackages:
         kernelPackages.extend (
-          self: super: {
+          _: super: {
             kernel = super.kernel.override (originalArgs: {
               inherit (config.boot.kernel) randstructSeed;
               kernelPatches = (originalArgs.kernelPatches or [ ]) ++ config.boot.kernelPatches;

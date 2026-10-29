@@ -37,6 +37,21 @@ This project aims to fix NixOS by creating a software system without hardcoded a
   - *What it is:* An independent, alternative rewrite of the Nix module system designed from scratch for high-performance evaluation memoization.
   - *Why use it / Rationale:* Standard NixOS module evaluation (`lib/modules.nix` in Nixpkgs) can become a massive performance bottleneck as configurations scale. Adios experiments with optimization paths to slash evaluation overhead.
   - *Why haven't I implemented it yet:* It is currently an experimental sandbox/R&D project rather than an official mainstream replacement. Adopting it means moving away from stable Nixpkgs module APIs, facing niche debugging errors, and risking high maintenance overhead if upstream code diverges.
+
+Core Nix Interpreter Engine (Repository: https://github.com/NixOS/nix)
+├── [Expression Evaluator, Parser, and Compiler](https://github.com/NixOS/nix/tree/master/src/libexpr) (src/libexpr/)
+├── [Nix Store Management Logic](https://github.com/NixOS/nix/tree/master/src/libstore) (src/libstore/)
+└── Evaluates the [NixOS Module System Framework](https://github.com/NixOS/nixpkgs/blob/master/lib/modules.nix) (lib/modules.nix)
+    ├── [Packages](https://github.com/NixOS/nixpkgs/tree/master/pkgs) (Nixpkgs repository)
+    │   └── Examples: pkgs.git, pkgs.firefox
+    ├── [Options](https://github.com/NixOS/nixpkgs/blob/master/doc/module-system/module-system.chapter.md) (Module Schema / API)
+    │   └── Examples: networking.hostName, services.nginx.enable
+    ├── [Modules](https://wiki.nixos.org/wiki/NixOS_modules) (Configuration Containers)
+    │   └── Examples: configuration.nix, hardware-configuration.nix
+    │       └── [Services](https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/services) (Module Subtype)
+    │           └── Examples: services.openssh, services.postgresql
+    └── [System Generation](https://github.com/NixOS/nixpkgs/blob/master/lib/modules.nix) (Final Output)
+
 - **Alternative High-Performance Evaluation Engines (e.g., [llakala/lladios](https://github.com/llakala/lladios)):**
   - Exploring optimized personal forks and patches to further squeeze evaluation performance.
 - **Custom Non-Turing Complete Configurations:**

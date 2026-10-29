@@ -89,7 +89,7 @@ final: prev: {
       modify =
         scope:
         (scope.overrideScope (
-          qfinal: qprev: {
+          _qfinal: qprev: {
             qtbase = qprev.qtbase.override {
               udev = final.libudev-zero;
             };
@@ -106,7 +106,7 @@ final: prev: {
       modify =
         scope:
         (scope.overrideScope (
-          qfinal: qprev: {
+          _qfinal: qprev: {
             qtbase = qprev.qtbase.override {
               systemdSupport = false;
               udev = final.libudev-zero;
@@ -175,7 +175,7 @@ final: prev: {
         udev = final.libudev-zero;
       };
 
-  smartmontools = prev.smartmontools.overrideAttrs (o: {
+  smartmontools = prev.smartmontools.overrideAttrs (_o: {
     buildInputs = [ ];
   });
 

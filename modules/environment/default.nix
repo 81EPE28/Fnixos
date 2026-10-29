@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   finix-logo = pkgs.runCommand "finix-logo" { } ''
     install -Dm644 ${../../assets/finix-logo.svg} $out/share/icons/hicolor/scalable/apps/finix-logo.svg
