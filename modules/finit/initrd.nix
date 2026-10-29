@@ -31,6 +31,13 @@ in
     # finit's own binary in the initramfs PATH
     path = [ config.finit.package ];
 
+    finit.settings = {
+      runlevel = 1;
+      readiness = "none";
+      environment.PATH = "/bin:/sbin:/usr/bin:/usr/local/bin";
+      modules = config.boot.initrd.kernelModules;
+    };
+
     finit.run.setup-stdio = {
       priority = 100;
       script = ''
@@ -42,7 +49,7 @@ in
     };
 
     finit.run.switch-root = {
-      runlevels = "1";
+      runlevel = "1";
       script = ''
         # process the kernel command line to find init=
         stage2Init=/init
@@ -55,7 +62,9 @@ in
           esac
         done
 
-        # TODO: modify `initctl switch-root` call in finit to have a proper return code
+        # `initctl switch-root` returns a real exit code on failure (finit-project/finit#496)
+        # Keep these checks anyway: they're cheap, catch the common cases before weeven spawn initctl,
+        # and don't depend on finit being patched
         if [ ! -d /sysroot ] || ! mountpoint -q /sysroot || [ ! -x "/sysroot$stage2Init" ]; then
           cat > /dev/console <<EOF
 
@@ -96,7 +105,7 @@ in
     };
 
     finit.ttys.rescue = {
-      runlevels = "1";
+      runlevel = "1";
       device = "@console";
       conditions = "run/switch-root/failure";
       rescue = true;
@@ -111,13 +120,6 @@ in
         target = "/etc/os-release";
         source = pkgs.writeText "os-release" ''
           PRETTY_NAME="finix - stage 1"
-        '';
-      }
-      {
-        target = "/etc/modules-load.d/finix.conf";
-        source = pkgs.writeText "finix.conf" ''
-
-          ${lib.concatStringsSep "\n" config.boot.initrd.kernelModules}
         '';
       }
       {
@@ -170,7 +172,6 @@ in
       }
       { source = "${config.finit.package}/libexec"; }
       { source = "${config.finit.package}/lib/finit/plugins/bootmisc.so"; }
-      { source = "${config.finit.package}/lib/finit/plugins/modules-load.so"; }
       { source = "${config.finit.package}/lib/finit/plugins/pidfile.so"; }
       { source = "${config.finit.package}/lib/finit/rescue.conf"; }
       { source = "${config.finit.package}/lib/finit/tmpfiles.d"; }

@@ -70,6 +70,16 @@ let
         in
         base.generate name transformedValue;
     };
+
+  session_rundir =
+    if config.services.sessiond.enable then
+      "session optional ${config.services.sessiond.package}/lib/security/pam_sessiond.so"
+    else if config.services.elogind.enable then
+      "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"
+    else if config.services.seatd.enable then
+      "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"
+    else
+      false;
 in
 {
   options.services.openssh = {
@@ -300,7 +310,7 @@ in
 
     finit.tasks.ssh-keygen = {
       description = "generate ssh host keys";
-      log = true;
+      log = { };
       command = pkgs.writeShellScript "ssh-keygen.sh" ''
         if ! [ -s "/var/lib/sshd/ssh_host_ed25519_key" ]; then
           ${cfg.package}/bin/ssh-keygen -t ed25519 -f "/var/lib/sshd/ssh_host_ed25519_key" -N ""
@@ -317,15 +327,12 @@ in
       ];
       notify = "pid";
       command = "${cfg.package}/bin/sshd -D -f /etc/ssh/sshd_config";
-      cgroup.name = "user";
+      cgroup.user = { };
+
+      reload-triggers = [
+        config.environment.etc."ssh/sshd_config".source
+      ];
     };
-
-    # TODO: add finit.services.reloadTriggers option
-    environment.etc."finit.d/sshd.conf".text = lib.mkAfter ''
-
-      # reload trigger
-      # ${config.environment.etc."ssh/sshd_config".source}
-    '';
 
     environment.etc."ssh/sshd_config".source = configFile;
 
@@ -345,8 +352,7 @@ in
         session required pam_env.so debug conffile=/etc/security/pam_env.conf readenv=0 # env (order 10100)
         session required pam_unix.so debug # unix (order 10200)
 
-        ${lib.optionalString config.services.elogind.enable "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"}
-        ${lib.optionalString config.services.seatd.enable "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"}
+        ${lib.optionalString (session_rundir != false) session_rundir}
 
         session required pam_loginuid.so debug # loginuid (order 10300)
         session required pam_limits.so

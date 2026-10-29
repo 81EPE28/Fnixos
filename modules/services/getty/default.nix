@@ -1,17 +1,18 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }:
 let
   cfg = config.services.getty;
+  # ESC byte via JSON's \u escape
+  esc = builtins.fromJSON ''"\u001b"'';
 in
 {
   options.services.getty = {
     enable = lib.mkOption {
       type = lib.types.bool;
-      default = true;
+      default = false;
       description = ''
         Whether to enable `getty`.
       '';
@@ -58,20 +59,24 @@ in
     environment.etc.issue = lib.mkDefault {
       text = ''
 
-        [1;32m<<< welcome to finix >>>[0m
+        ${esc}[1;32m<<< welcome to finix >>>${esc}[0m
 
       '';
     };
 
     finit.ttys = lib.genAttrs cfg.ttys (
-      device:
+      tty:
       {
-        description = "getty on ${device}";
         nowait = true;
       }
-      // lib.optionalAttrs (cfg.package != null) {
-        command = "${lib.getExe cfg.package} ${lib.escapeShellArgs cfg.extraArgs} ${device}";
-      }
+      // (
+        if cfg.package != null then
+          # external getty; it is handed the tty as its last argument
+          { command = "${lib.getExe cfg.package} ${lib.escapeShellArgs cfg.extraArgs} ${tty}"; }
+        else
+          # finit's built-in getty
+          { device = "/dev/${tty}"; }
+      )
     );
   };
 }

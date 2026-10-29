@@ -10,7 +10,17 @@ let
 
   format = pkgs.formats.keyValue { };
 
-  brightnessctl = config.programs.brightnessctl.package or pkgs.brightnessctl;
+  brightnessctl = config.programs.brightnessctl.package;
+
+  session_rundir =
+    if config.services.sessiond.enable then
+      "session optional ${config.services.sessiond.package}/lib/security/pam_sessiond.so"
+    else if config.services.elogind.enable then
+      "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"
+    else if config.services.seatd.enable then
+      "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"
+    else
+      false;
 in
 {
   options.services.ly = {
@@ -38,7 +48,7 @@ in
     };
 
     settings = lib.mkOption {
-      type = format.type;
+      inherit (format) type;
       defaultText = lib.literalExpression "See description.";
       description = ''
         `ly` configuration. See [upstream example](https://github.com/fairyglade/ly/blob/master/res/config.ini)
@@ -67,8 +77,6 @@ in
 
       restart_cmd = "${config.finit.package}/bin/initctl reboot";
       shutdown_cmd = "${config.finit.package}/bin/initctl poweroff";
-      brightness_up_cmd = lib.mkDefault "${lib.getExe brightnessctl} -q s +10%";
-      brightness_down_cmd = lib.mkDefault "${lib.getExe brightnessctl} -q s 10%-";
     }
     // lib.optionalAttrs (lib.versionAtLeast cfg.package.version "1.5.0") {
       # write to syslog
@@ -82,6 +90,10 @@ in
         else
           (lib.getExe config.programs.xorg.package);
       xsessions = "/run/current-system/sw/share/xsessions";
+    }
+    // lib.optionalAttrs config.programs.brightnessctl.enable or false {
+      brightness_up_cmd = lib.mkDefault "${lib.getExe brightnessctl} -q s +10%";
+      brightness_down_cmd = lib.mkDefault "${lib.getExe brightnessctl} -q s 10%-";
     };
 
     environment.etc."ly/config.ini".source = format.generate "config.ini" cfg.settings;
@@ -103,9 +115,8 @@ in
           session required pam_env.so debug conffile=/etc/security/pam_env.conf readenv=1
           session required pam_unix.so
           session optional pam_loginuid.so
-          ${lib.optionalString config.services.elogind.enable "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"}
-          ${lib.optionalString config.services.seatd.enable "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"}
-          session required ${config.security.pam.package}/lib/security/pam_lastlog.so silent
+          ${lib.optionalString (session_rundir != false) session_rundir}
+          session required ${pkgs.util-linux.lastlog}/lib/security/pam_lastlog2.so silent # lastlog (order 10700)
           session required pam_limits.so
         '';
       };
@@ -116,15 +127,15 @@ in
 
     finit.services.ly = {
       description = "ly terminal display/login manager";
-      runlevels = "34";
+      runlevel = "34";
       conditions = [
         "service/syslogd/ready"
       ]
       ++ lib.optionals config.services.elogind.enable [ "service/elogind/ready" ]
       ++ lib.optionals config.services.seatd.enable [ "service/seatd/ready" ];
       command = "${pkgs.util-linux}/bin/agetty -nil ${cfg.package}/bin/ly tty${toString cfg.tty}";
-      nohup = true;
-      cgroup.name = "user";
+      reload-signal = "none";
+      cgroup.user = { };
     };
   };
 }

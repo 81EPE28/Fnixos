@@ -144,10 +144,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    finit.tmpfiles.rules = lib.optionals (cfg.dataDir == "/var/lib/sonarr") [
-      "d ${cfg.dataDir} 0700 ${cfg.user} ${cfg.group}"
-    ];
-
     finit.services.sonarr = {
       inherit (cfg) user group;
 
@@ -157,14 +153,18 @@ in
         "net/route/default"
       ];
       command = "${lib.getExe cfg.package} -nobrowser -data=${cfg.dataDir}";
-      nohup = true;
-      log = true;
+      reload-signal = "none";
+      log = { };
       environment = toEnvVars cfg.settings;
+    }
+    // lib.optionalAttrs (cfg.dataDir == "/var/lib/sonarr") {
+      state-dir = "sonarr";
+      state-dir-mode = "0700";
     };
 
     users.users = lib.optionalAttrs (cfg.user == "sonarr") {
       sonarr = {
-        group = cfg.group;
+        inherit (cfg) group;
         home = cfg.dataDir;
         uid = config.ids.uids.sonarr;
       };

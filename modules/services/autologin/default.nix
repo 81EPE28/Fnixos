@@ -6,6 +6,16 @@
 }:
 let
   cfg = config.services.autologin;
+
+  session_rundir =
+    if config.services.sessiond.enable then
+      "session optional ${config.services.sessiond.package}/lib/security/pam_sessiond.so"
+    else if config.services.elogind.enable then
+      "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"
+    else if config.services.seatd.enable then
+      "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"
+    else
+      false;
 in
 {
   options.services.autologin = {
@@ -59,10 +69,9 @@ in
         session required pam_env.so conffile=/etc/security/pam_env.conf readenv=0 # env (order 10100)
         session required pam_unix.so # unix (order 10200)
         session required pam_loginuid.so # loginuid (order 10300)
-        session required ${config.security.pam.package}/lib/security/pam_lastlog.so silent # lastlog (order 10700)
+        session required ${pkgs.util-linux.lastlog}/lib/security/pam_lastlog2.so silent # lastlog (order 10700)
 
-        ${lib.optionalString config.services.elogind.enable "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"}
-        ${lib.optionalString config.services.seatd.enable "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"}
+        ${lib.optionalString (session_rundir != false) session_rundir}
         session required pam_limits.so
       '';
     };
@@ -75,11 +84,12 @@ in
       conditions = [
         "service/syslogd/ready"
       ]
+      ++ lib.optionals config.services.sessiond.enable [ "service/sessiond/ready" ]
       ++ lib.optionals config.services.elogind.enable [ "service/elogind/ready" ]
       ++ lib.optionals config.services.seatd.enable [ "service/seatd/ready" ];
-      log = true;
-      nohup = true;
-      cgroup.name = "user";
+      log = { };
+      reload-signal = "none";
+      cgroup.user = { };
       tty = lib.mkForce "/dev/tty1";
     };
   };

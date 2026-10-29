@@ -9,6 +9,16 @@ let
   format = pkgs.formats.toml { };
 
   configFile = format.generate "greetd.toml" cfg.settings;
+
+  session_rundir =
+    if config.services.sessiond.enable then
+      "session optional ${config.services.sessiond.package}/lib/security/pam_sessiond.so"
+    else if config.services.elogind.enable then
+      "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"
+    else if config.services.seatd.enable then
+      "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"
+    else
+      false;
 in
 {
   options.services.greetd = {
@@ -21,7 +31,7 @@ in
     };
 
     settings = lib.mkOption {
-      type = format.type;
+      inherit (format) type;
       default = { };
       description = ''
         `greetd` configuration. See {manpage}`greetd(5)`
@@ -31,7 +41,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-
     services.greetd.settings = {
       terminal.vt = lib.mkDefault "next";
       default_session = {
@@ -42,14 +51,15 @@ in
 
     finit.services.greetd = {
       description = "greeter daemon";
-      runlevels = "34";
+      runlevel = "34";
       conditions = [
         "service/syslogd/ready"
       ]
+      ++ lib.optionals config.services.sessiond.enable [ "service/sessiond/ready" ]
       ++ lib.optionals config.services.elogind.enable [ "service/elogind/ready" ]
       ++ lib.optionals config.services.seatd.enable [ "service/seatd/ready" ];
       command = "${pkgs.greetd}/bin/greetd --config ${configFile}";
-      cgroup.name = "user";
+      cgroup.user = { };
     };
 
     users.users = {
@@ -94,9 +104,10 @@ in
         session required pam_unix.so # unix (order 10200)
         session required pam_loginuid.so # loginuid (order 10300)
         session required pam_limits.so
-      ''
-      + lib.optionalString config.services.elogind.enable "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"
-      + lib.optionalString config.services.seatd.enable "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so";
+        session required ${pkgs.util-linux.lastlog}/lib/security/pam_lastlog2.so silent # lastlog (order 10700)
+
+        ${lib.optionalString (session_rundir != false) session_rundir}
+      '';
     };
 
   };

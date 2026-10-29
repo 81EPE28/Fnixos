@@ -42,7 +42,7 @@ in
       };
       default = { };
       description = ''
-        `udisks2` configuration. See {manpage}`udisks2.conf(8)`
+        `udisks2` configuration. See {manpage}`udisks2.conf(5)`
         for additional details.
       '';
     };
@@ -69,7 +69,7 @@ in
       description = "disk manager";
       command = "${cfg.package}/libexec/udisks2/udisksd" + lib.optionalString cfg.debug " --debug";
       conditions = "service/dbus/ready";
-      log = true;
+      log = { };
     };
   };
 }

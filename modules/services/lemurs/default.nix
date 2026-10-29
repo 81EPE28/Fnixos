@@ -9,6 +9,16 @@ let
 
   format = pkgs.formats.toml { };
   configFile = format.generate "config.toml" cfg.settings;
+
+  session_rundir =
+    if config.services.sessiond.enable then
+      "session optional ${config.services.sessiond.package}/lib/security/pam_sessiond.so"
+    else if config.services.elogind.enable then
+      "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"
+    else if config.services.seatd.enable then
+      "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"
+    else
+      false;
 in
 {
   options.services.lemurs = {
@@ -30,7 +40,7 @@ in
     };
 
     settings = lib.mkOption {
-      type = format.type;
+      inherit (format) type;
       default = { };
       description = ''
         `lemurs` configuration. See [upstream documentation](https://github.com/coastalwhite/lemurs/blob/main/extra/config.toml)
@@ -111,9 +121,8 @@ in
           session required pam_unix.so # unix (order 10200)
           # https://github.com/coastalwhite/lemurs/issues/166
           session optional pam_loginuid.so # loginuid (order 10300)
-          ${lib.optionalString config.services.elogind.enable "session optional ${pkgs.elogind}/lib/security/pam_elogind.so"}
-          ${lib.optionalString config.services.seatd.enable "session optional ${pkgs.pam_rundir}/lib/security/pam_rundir.so"}
-          session required ${config.security.pam.package}/lib/security/pam_lastlog.so silent # lastlog (order 10700)
+          ${lib.optionalString (session_rundir != false) session_rundir}
+          session required ${pkgs.util-linux.lastlog}/lib/security/pam_lastlog2.so silent # lastlog (order 10700)
           session required pam_limits.so
         '';
       };
@@ -128,7 +137,7 @@ in
       description = "lemurs terminal user interface display/login manager";
       conditions = "service/syslogd/ready";
       command = "${pkgs.util-linux}/bin/agetty -nil ${cfg.package}/bin/lemurs tty${toString cfg.settings.tty}";
-      cgroup.name = "user";
+      cgroup.user = { };
     };
   };
 }

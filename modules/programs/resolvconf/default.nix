@@ -50,7 +50,7 @@ in
     };
 
     settings = lib.mkOption {
-      type = format.type;
+      inherit (format) type;
       default = { };
       description = ''
         `resolvconf` configuration. See {manpage}`resolvconf.conf(5)`
@@ -76,13 +76,11 @@ in
 
     finit.tasks.resolvconf = {
       command = "${lib.getExe cfg.package} -u";
-      remain = true;
+      remain-after-exit = true;
+
+      reload-triggers = [
+        config.environment.etc."resolvconf.conf".source
+      ];
     };
-
-    environment.etc."finit.d/resolvconf.conf".text = lib.mkAfter ''
-
-      # force a restart on configuration change
-      # ${config.environment.etc."resolvconf.conf".source}
-    '';
   };
 }

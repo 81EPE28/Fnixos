@@ -66,7 +66,7 @@ in
     };
 
     settings = lib.mkOption {
-      type = format.type;
+      inherit (format) type;
       default = { };
       description = ''
         `blocky` configuration. See [upstream documentation](https://0xerr0r.github.io/blocky/configuration)
@@ -94,15 +94,15 @@ in
         "net/route/default"
       ];
       command = "${lib.getExe cfg.package} --config ${configFile}";
-      caps = [ "^cap_net_bind_service" ];
-      log = true;
-      nohup = true;
+      capabilities = [ "^cap_net_bind_service" ];
+      log = { };
+      reload-signal = "none";
     };
 
     users.users = lib.mkIf (cfg.user == "blocky") {
       blocky = {
         isSystemUser = true;
-        group = cfg.group;
+        inherit (cfg) group;
       };
     };
 

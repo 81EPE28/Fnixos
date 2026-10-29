@@ -18,9 +18,11 @@ let
       wireplumber
       xorg
       xinit
+
       flatpak
       gvfs
       polkit
+      sessiond-uaccess
     ];
 
     specialisation.libudev-zero = {
@@ -35,6 +37,11 @@ let
       programs.plymouth.enable = true;
     };
 
+    specialisation.elogind = {
+      services.elogind.enable = true;
+      services.sessiond.enable = lib.mkForce false;
+    };
+
     programs.brightnessctl.enable = true;
     programs.hyprland.enable = true;
     programs.labwc.enable = true;
@@ -45,11 +52,14 @@ let
     programs.sway.enable = true;
     programs.wireplumber.enable = true;
     programs.xorg.enable = true;
+
     services.dbus.enable = true;
     services.flatpak.enable = true;
     services.gvfs.enable = true;
     services.illum.enable = true;
     services.polkit.enable = true;
+    services.sessiond.enable = true;
+    services.sessiond-uaccess.enable = true;
   };
 
   out =

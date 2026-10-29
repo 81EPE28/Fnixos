@@ -170,16 +170,7 @@ in
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.eudev.overrideAttrs (o: {
-        # see https://github.com/eudev-project/eudev/pull/290
-        patches = (o.patches or [ ]) ++ [
-          (pkgs.fetchpatch {
-            name = "s6-readiness.patch";
-            url = "https://github.com/eudev-project/eudev/pull/290/commits/48e9923a1d0218d714989d8aec119e301aa930ae.patch";
-            sha256 = "sha256-Icor2v2OYizquLW0ytYONjhCUW+oTs5srABamQR9Uvk=";
-          })
-        ];
-      });
+      default = pkgs.eudev;
       defaultText = lib.literalExpression "pkgs.eudev";
       description = ''
         The package to use for `eudev`.
@@ -221,6 +212,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = lib.versionAtLeast cfg.package.version "3.2.15";
+        message = "eudev has to be version >= 3.2.15";
+      }
+    ];
+
     # services.udev.packages = [ extraUdevRules extraHwdbFile ];
     services.udev.path = [
       config.programs.coreutils.package
@@ -233,13 +231,13 @@ in
     # adapted from https://github.com/troglobit/finit/blob/master/system/10-hotplug.conf.in
     finit.services.udevd = {
       description = "device event daemon (${cfg.package.pname})";
-      runlevels = "S12345789";
+      runlevel = "S12345789";
       command = "${cfg.package}/bin/udevd --ready-notify=%n" + lib.optionalString cfg.debug " -D";
       notify = "s6";
-      pid = "udevd";
-      log = true;
-      nohup = true;
-      cgroup.name = "system";
+      pidfile = "udevd";
+      log = { };
+      reload-signal = "none";
+      cgroup.system = { };
     };
 
     # Wait for udevd to start, then trigger coldplug events and module loading.
@@ -247,11 +245,10 @@ in
     finit.run =
       let
         defaults = {
-          runlevels = "S";
+          runlevel = "S";
           conditions = "service/udevd/ready";
-          log = true;
-          cgroup.name = "init";
-          extraConfig = "nowarn";
+          log = { };
+          cgroup.init = { };
 
           priority = 1;
         };

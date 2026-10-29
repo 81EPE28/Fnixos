@@ -54,7 +54,7 @@ in
     };
 
     settings = lib.mkOption {
-      type = format.type;
+      inherit (format) type;
       default = { };
       description = ''
         `ifupdown-ng` configuration. See {manpage}`ifupdown-ng.conf(5)`
@@ -199,14 +199,12 @@ in
 
     finit.tasks.ifupdown-ng = {
       description = "bring up network interfaces";
-      log = true;
-      remain = true;
+      log = { };
+      remain-after-exit = true;
       command =
         "${cfg.package}/bin/ifup -E ${cfg.package}/libexec/ifupdown-ng "
         + lib.escapeShellArgs cfg.extraArgs;
-      post = pkgs.writeShellScript "ifdown.sh" ''
-        ${cfg.package}/bin/ifdown -E ${cfg.package}/libexec/ifupdown-ng ${lib.escapeShellArgs cfg.extraArgs}
-      '';
+      exec-stop-post = "${cfg.package}/bin/ifdown -E ${cfg.package}/libexec/ifupdown-ng ${lib.escapeShellArgs cfg.extraArgs}";
       conditions = [
         "service/syslogd/ready"
       ]
