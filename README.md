@@ -13,15 +13,17 @@
 ## Core Goal & Vision
 
 **Goal to manage multiple architecture, mobile, embedded, routers, pc:**
-Push declarative systems engineering to the edge by removing hardcoded assumptions. Once we decouple finix from coreutils and all other nonsense, we can even manage [our phones](https://github.com/mobile-nixos/mobile-nixos).
+Improve declarative systems by removing hardcoded assumptions. 
+Once we decouple finix from nixos assumptions and opinionated frameworks we can even manage all kind of devices [mobile](https://github.com/mobile-nixos/mobile-nixos), embedded, routers, servers you name it.
 
 ### Key Pillars
-- **Minimalism:** Decoupling bashisms, coreutils (`ubase`, `busybox`, `uutils`), and standard daemons.
+- **Only what you need:** Decoupling bashisms, coreutils (`ubase`, `busybox`, `uutils`), and standard daemons.
 - **Shell Agnosticism:** Running lightweight alternatives (`ash`, `dash`, `kmsh`) instead of GNU Bash.
 - **Multi-Platform:** Scaling cleanly across PCs, embedded boards, routers, and mobile devices.
 - **Alternative Engines:** Exploring non-Turing-complete config languages and module system optimizations.
 
 ## TODO
+- [ ] Clean pkgs, build a polyrepo for Fpkgs
 - [ ] Decouple coreutils and bashisms from build/activation scripts
 - [ ] Integrate agnostic init systems (finit, minimal PID 1)
 - [ ] Validate RISC-V and embedded hardware targets
