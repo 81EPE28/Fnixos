@@ -6,86 +6,25 @@
   <a href="https://github.com/finix-community/finix"><img src="https://img.shields.io/badge/Community-finix-orange" alt="Finix Community"></a>
 </p>
 
-> F-nixos (Fixing nixos) of all the hardcoded asumptions fork of finix which decopules the init to be agnostic keeping compatibility with nixos
+> A modular, opinion-free NixOS fork decoupling init, shell, and coreutils for true system agnosticism.
 
-> **Note:** F-nixos is a fork of [finix](https://github.com/finix-community/finix) by the finix-community. All credits for the foundational work go to them!
+> **Note:** Fork of [finix](https://github.com/finix-community/finix) by the finix-community.
 
-This project aims to fix NixOS by creating a software system without hardcoded assumptions or opinions—striving for true agnosticism.
+## Core Goal & Vision
 
+**Goal to manage multiple architecture, mobile, embedded, routers, pc:**
+Push declarative systems engineering to the edge by removing hardcoded assumptions. Once we decouple finix from coreutils and all other nonsense, we can even manage [our phones](https://github.com/mobile-nixos/mobile-nixos).
 
-## Overview
-
-**F-nixos** is an experimental, modular NixOS framework designed to push declarative systems engineering to the absolute edge.
-
-### The Core Vision & Mission
-- **Currently working on decoupling bash and bashisms for true system minimalism.**
-- **The Ultimate OpenWrt Slayer & Embedded RISC-V Powerhouse:** Managing embedded systems to replace OpenWrt and build ultra-small, deterministic flash images using `ubase`, `busybox`, or custom `uutils`. Perfect for constrained targets like RISC-V boards (Milk-V, StarFive, D1) and IoT devices.
-- **True Shell Agnosticism:** Who says `/bin/sh` has to be a bloated GNU Bash? Run a system completely free of Bash, leveraging lightweight alternatives like `ash`, `dash`, `kmsh`, or whatever fits your architecture.
-- **The Next-Gen Config Language:** Planned development of a dedicated, non-Turing-complete configuration language (inspired by Dhall) to guarantee evaluation termination and eliminate Nix quirks, keeping a cleaner and less abstract approach than alternatives like Lix, Snix, or Nickel.
-- **Daemon & Tooling Agnostic:** Decoupling userland from the traditional `nix-daemon` RPC protocol to allow modular store managers, transport layers, and independent tooling ecosystems.
-- **Kernel Agnostic Explorations:** Investigating alternative kernel architectures and primitives, including framework experiments like [sigil](https://git.sr.ht/~ehmry/sigil) and [adios](https://github.com/adisbladis/adios).
-
-## Features
-
-- **Agnostic Architecture:** Build custom system configurations using reusable, decoupled Nix modules.
-- **Flexible Shells & Utilities:** Plug-and-play support for alternative shells (`ash`, `dash`, `bash`, `fish`) and minimal userland coreutils.
-- **Embedded & Multi-System Support:** Optimized for minimal resource footprints across `x86_64-linux`, `aarch64-linux`, and RISC-V architectures.
-
-## Ideas into consideration (feel free to reach me and suggest ideas)
-
-- **Alternative Module System Engines (Adios by adisbladis / [adisbladis/adios](https://github.com/adisbladis/adios)):**
-  - *What it is:* An independent, alternative rewrite of the Nix module system designed from scratch for high-performance evaluation memoization.
-  - *Why use it / Rationale:* Standard NixOS module evaluation (`lib/modules.nix` in Nixpkgs) can become a massive performance bottleneck as configurations scale. Adios experiments with optimization paths to slash evaluation overhead.
-  - *Why haven't I implemented it yet:* It is currently an experimental sandbox/R&D project rather than an official mainstream replacement. Adopting it means moving away from stable Nixpkgs module APIs, facing niche debugging errors, and risking high maintenance overhead if upstream code diverges.
-
-Core Nix Interpreter Engine (Repository: https://github.com/NixOS/nix)
-├── [Expression Evaluator, Parser, and Compiler](https://github.com/NixOS/nix/tree/master/src/libexpr) (src/libexpr/)
-├── [Nix Store Management Logic](https://github.com/NixOS/nix/tree/master/src/libstore) (src/libstore/)
-└── Evaluates the [NixOS Module System Framework](https://github.com/NixOS/nixpkgs/blob/master/lib/modules.nix) (lib/modules.nix)
-    ├── [Packages](https://github.com/NixOS/nixpkgs/tree/master/pkgs) (Nixpkgs repository)
-    │   └── Examples: pkgs.git, pkgs.firefox
-    ├── [Options](https://github.com/NixOS/nixpkgs/blob/master/doc/module-system/module-system.chapter.md) (Module Schema / API)
-    │   └── Examples: networking.hostName, services.nginx.enable
-    ├── [Modules](https://wiki.nixos.org/wiki/NixOS_modules) (Configuration Containers)
-    │   └── Examples: configuration.nix, hardware-configuration.nix
-    │       └── [Services](https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/services) (Module Subtype)
-    │           └── Examples: services.openssh, services.postgresql
-    └── [System Generation](https://github.com/NixOS/nixpkgs/blob/master/lib/modules.nix) (Final Output)
-
-- **Alternative High-Performance Evaluation Engines (e.g., [llakala/lladios](https://github.com/llakala/lladios)):**
-  - Exploring optimized personal forks and patches to further squeeze evaluation performance.
-- **Custom Non-Turing Complete Configurations:**
-  - Designing custom configurations to bypass traditional Nix interpreter bottlenecks and guarantee termination.
+### Key Pillars
+- **Minimalism:** Decoupling bashisms, coreutils (`ubase`, `busybox`, `uutils`), and standard daemons.
+- **Shell Agnosticism:** Running lightweight alternatives (`ash`, `dash`, `kmsh`) instead of GNU Bash.
+- **Multi-Platform:** Scaling cleanly across PCs, embedded boards, routers, and mobile devices.
+- **Alternative Engines:** Exploring non-Turing-complete config languages and module system optimizations.
 
 ## TODO
-- [ ] Decouple remaining hardcoded bashisms from core build scripts and activation logic
-- [ ] Agnostic init system integration (finit and minimal PID 1 architectures)
-- [ ] Agnostic shell support (`ash`, `dash`, `kmsh` integration)
-- [ ] Minimal embedded image generation using `ubase`, `busybox`, and `uutils` (OpenWrt replacement target)
-- [ ] RISC-V hardware target validation and optimization
-- [ ] Kernel-agnostic component and framework integration (via [sigil](https://git.sr.ht/~ehmry/sigil))
-- [ ] Non-Turing-complete configuration language specification (guaranteed termination/Dhall-inspired)
-- [ ] Daemon-agnostic tooling decoupling (`nix-daemon` independence)
-- [ ] Ensure full backward compatibility with standard NixOS packages and modules
-- [ ] Remove all remaining hardcoded system assumptions and opinions
-- [ ] Expand documentation and agnostic configuration examples
-- [ ] Agnostic init system integration (finit and minimal PID 1 architectures)
-- [ ] Agnostic shell support (`ash`, `dash`, `kmsh` integration)
-- [ ] Minimal embedded image generation using `ubase`, `busybox`, and `uutils` (OpenWrt replacement target)
-- [ ] RISC-V hardware target validation and optimization
-- [ ] Kernel-agnostic component and framework integration (via [sigil](https://git.sr.ht/~ehmry/sigil))
-- [ ] Non-Turing-complete configuration language specification (guaranteed termination/Dhall-inspired)
-- [ ] Daemon-agnostic tooling decoupling (`nix-daemon` independence)
-- [ ] Ensure full backward compatibility with standard NixOS packages and modules
-- [ ] Remove all remaining hardcoded system assumptions and opinions
-- [ ] Expand documentation and agnostic configuration examples
-
-- [ ] Agnostic init
-- [ ] Agnostic shell
-- [ ] Agnostic utilities
-- [ ] Agnostic kernel
-- [ ] Ensure full compatibility with NixOS
-- [ ] Remove remaining hardcoded system assumptions
-- [ ] Enhance modular shell support
-- [ ] Expand documentation and agnostic configuration examples
-- [ ] Improve testing workflows
+- [ ] Decouple coreutils and bashisms from build/activation scripts
+- [ ] Integrate agnostic init systems (finit, minimal PID 1)
+- [ ] Validate RISC-V and embedded hardware targets
+- [ ] Expand mobile (Mobile NixOS) and router support
+- [ ] Implement non-Turing-complete configuration language
+- [ ] Maintain full NixOS package/module compatibility
