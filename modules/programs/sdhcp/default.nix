@@ -10,13 +10,13 @@ let
     __structuredAttrs = true;
 
     src = pkgs.fetchgit {
-      url = "git://git.2f30.org/sdhcp";
+      url = "https://git.2f30.org/sdhcp";
       rev = "8455fd2d090bd9b227340c30c92c6aa13302c91a";
       hash = "sha256-bN2jFO+cp1Vck0RvB8q2qwMYpUARH2mjZuWs3FkhxR0=";
     };
 
     postPatch = ''
-      substituteInPlace Makefile --replace-fail "ranlib" "\$(RANLIB)"
+      substituteInPlace Makefile --replace-fail "ranlib" "\$(RANLIB)" 
     '';
 
     makeFlags = [
