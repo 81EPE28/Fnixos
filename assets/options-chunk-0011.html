@@ -1,3 +1,24 @@
+<div class="option" id="option-services.openssh.settings.Ciphers">
+  <h3 class="option-name">
+    <a href="#option-services.openssh.settings.Ciphers" class="option-anchor">services.openssh.settings.Ciphers</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Allowed ciphers</p>
+<p>Defaults to recommended settings from both
+&lt;<a href="https://stribika.github.io/2015/01/04/secure-secure-shell.html">https://stribika.github.io/2015/01/04/secure-secure-shell.html</a>&gt;
+and
+&lt;<a href="https://infosec.mozilla.org/guidelines/openssh#modern-openssh-67">https://infosec.mozilla.org/guidelines/openssh#modern-openssh-67</a>&gt;</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>list of string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">chacha20-poly1305@openssh.com</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes256-gcm@openssh.com</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes128-gcm@openssh.com</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes256-ctr</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes192-ctr</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes128-ctr</span><span style="color:rgb(152,195,121);">"</span><br><span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/openssh" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/openssh&gt;</a></code></dd>
+  </dl>
+</div>
 <div class="option" id="option-services.openssh.settings.HostKey">
   <h3 class="option-name">
     <a href="#option-services.openssh.settings.HostKey" class="option-anchor">services.openssh.settings.HostKey</a>
@@ -1768,23 +1789,6 @@ for additional details.</p>
 </body></html></div>
   <dl class="option-details">
     <dt>Type</dt><dd class="option-value"><code>absolute path</code></dd>
-  </dl>
-  <dl class="option-details option-sources">
-    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/system76-scheduler" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/system76-scheduler&gt;</a></code></dd>
-  </dl>
-</div>
-<div class="option" id="option-services.system76-scheduler.debug">
-  <h3 class="option-name">
-    <a href="#option-services.system76-scheduler.debug" class="option-anchor">services.system76-scheduler.debug</a>
-    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
-    <span class="copy-feedback">Link copied!</span>
-  </h3>
-  <div class="option-description"><html><head></head><body><p>Whether to enable debug logging.</p>
-</body></html></div>
-  <dl class="option-details">
-    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
-    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
-</body></html></dd>
   </dl>
   <dl class="option-details option-sources">
     <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/system76-scheduler" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/system76-scheduler&gt;</a></code></dd>

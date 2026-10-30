@@ -815,6 +815,25 @@ for additional details.</p>
     <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/programs/sbase" target="_blank" rel="noopener noreferrer">&lt;finix/modules/programs/sbase&gt;</a></code></dd>
   </dl>
 </div>
+<div class="option" id="option-programs.sdhcp.enable">
+  <h3 class="option-name">
+    <a href="#option-programs.sdhcp.enable" class="option-anchor">programs.sdhcp.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to enable sdhcp, a simple DHCP client.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">true</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/programs/sdhcp" target="_blank" rel="noopener noreferrer">&lt;finix/modules/programs/sdhcp&gt;</a></code></dd>
+  </dl>
+</div>
 <div class="option" id="option-programs.seahorse.enable">
   <h3 class="option-name">
     <a href="#option-programs.seahorse.enable" class="option-anchor">programs.seahorse.enable</a>
@@ -1760,25 +1779,6 @@ configuration. Card-specific drivers that need explicit configuration
 </body></html></div>
   <dl class="option-details">
     <dt>Type</dt><dd class="option-value"><code>16 bit unsigned integer; between 0 and 65535 (both inclusive)</code></dd>
-  </dl>
-  <dl class="option-details option-sources">
-    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/providers/firewall" target="_blank" rel="noopener noreferrer">&lt;finix/modules/providers/firewall&gt;</a></code></dd>
-  </dl>
-</div>
-<div class="option" id="option-providers.firewall.allowedTCPPorts">
-  <h3 class="option-name">
-    <a href="#option-providers.firewall.allowedTCPPorts" class="option-anchor">providers.firewall.allowedTCPPorts</a>
-    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
-    <span class="copy-feedback">Link copied!</span>
-  </h3>
-  <div class="option-description"><html><head></head><body><p>List of TCP ports on which incoming connections are accepted.</p>
-</body></html></div>
-  <dl class="option-details">
-    <dt>Type</dt><dd class="option-value"><code>list of 16 bit unsigned integer; between 0 and 65535 (both inclusive)</code></dd>
-    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span>&nbsp;<span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
-</body></html></dd>
-    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;<span style="color:rgb(209,154,102);">22</span><br>&nbsp;&nbsp;<span style="color:rgb(209,154,102);">80</span><br>&nbsp;&nbsp;<span style="color:rgb(209,154,102);">443</span><br><span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
-</body></html></dd>
   </dl>
   <dl class="option-details option-sources">
     <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/providers/firewall" target="_blank" rel="noopener noreferrer">&lt;finix/modules/providers/firewall&gt;</a></code></dd>

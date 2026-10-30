@@ -1,3 +1,20 @@
+<div class="option" id="option-services.illum.package">
+  <h3 class="option-name">
+    <a href="#option-services.illum.package" class="option-anchor">services.illum.package</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The package to use for <code>illum</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>package</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(86,182,194);">illum</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/illum" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/illum&gt;</a></code></dd>
+  </dl>
+</div>
 <div class="option" id="option-services.incus.enable">
   <h3 class="option-name">
     <a href="#option-services.incus.enable" class="option-anchor">services.incus.enable</a>
@@ -1872,27 +1889,6 @@ allowed. If the argument is <code>none</code> then no banner is displayed.</p>
   <dl class="option-details">
     <dt>Type</dt><dd class="option-value"><code>value "none" (singular enum) or absolute path</code></dd>
     <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">none</span><span style="color:rgb(152,195,121);">"</span></code></pre></body></html>
-</body></html></dd>
-  </dl>
-  <dl class="option-details option-sources">
-    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/openssh" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/openssh&gt;</a></code></dd>
-  </dl>
-</div>
-<div class="option" id="option-services.openssh.settings.Ciphers">
-  <h3 class="option-name">
-    <a href="#option-services.openssh.settings.Ciphers" class="option-anchor">services.openssh.settings.Ciphers</a>
-    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
-    <span class="copy-feedback">Link copied!</span>
-  </h3>
-  <div class="option-description"><html><head></head><body><p>Allowed ciphers</p>
-<p>Defaults to recommended settings from both
-&lt;<a href="https://stribika.github.io/2015/01/04/secure-secure-shell.html">https://stribika.github.io/2015/01/04/secure-secure-shell.html</a>&gt;
-and
-&lt;<a href="https://infosec.mozilla.org/guidelines/openssh#modern-openssh-67">https://infosec.mozilla.org/guidelines/openssh#modern-openssh-67</a>&gt;</p>
-</body></html></div>
-  <dl class="option-details">
-    <dt>Type</dt><dd class="option-value"><code>list of string</code></dd>
-    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">chacha20-poly1305@openssh.com</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes256-gcm@openssh.com</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes128-gcm@openssh.com</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes256-ctr</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes192-ctr</span><span style="color:rgb(152,195,121);">"</span><br>&nbsp;&nbsp;<span style="color:rgb(152,195,121);">"</span><span style="color:rgb(152,195,121);">aes128-ctr</span><span style="color:rgb(152,195,121);">"</span><br><span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
 </body></html></dd>
   </dl>
   <dl class="option-details option-sources">
