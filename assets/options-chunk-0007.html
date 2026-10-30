@@ -781,6 +781,40 @@ for additional details.</p>
     <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/programs/resolvconf" target="_blank" rel="noopener noreferrer">&lt;finix/modules/programs/resolvconf&gt;</a></code></dd>
   </dl>
 </div>
+<div class="option" id="option-programs.sbase.enable">
+  <h3 class="option-name">
+    <a href="#option-programs.sbase.enable" class="option-anchor">programs.sbase.enable</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to enable sbase unix tools.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/programs/sbase" target="_blank" rel="noopener noreferrer">&lt;finix/modules/programs/sbase&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-programs.sbase.package">
+  <h3 class="option-name">
+    <a href="#option-programs.sbase.package" class="option-anchor">programs.sbase.package</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The package to use for <code>sbase</code>.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>package</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(97,175,239);">callPackage</span>&nbsp;<span style="color:rgb(232,102,113);">./package.nix</span>&nbsp;<span style="color:rgb(132,139,152);">{</span><span style="color:rgb(132,139,152);">}</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/programs/sbase" target="_blank" rel="noopener noreferrer">&lt;finix/modules/programs/sbase&gt;</a></code></dd>
+  </dl>
+</div>
 <div class="option" id="option-programs.seahorse.enable">
   <h3 class="option-name">
     <a href="#option-programs.seahorse.enable" class="option-anchor">programs.seahorse.enable</a>
@@ -1745,40 +1779,6 @@ configuration. Card-specific drivers that need explicit configuration
 </body></html></dd>
     <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;<span style="color:rgb(209,154,102);">22</span><br>&nbsp;&nbsp;<span style="color:rgb(209,154,102);">80</span><br>&nbsp;&nbsp;<span style="color:rgb(209,154,102);">443</span><br><span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
 </body></html></dd>
-  </dl>
-  <dl class="option-details option-sources">
-    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/providers/firewall" target="_blank" rel="noopener noreferrer">&lt;finix/modules/providers/firewall&gt;</a></code></dd>
-  </dl>
-</div>
-<div class="option" id="option-providers.firewall.allowedUDPPortRanges">
-  <h3 class="option-name">
-    <a href="#option-providers.firewall.allowedUDPPortRanges" class="option-anchor">providers.firewall.allowedUDPPortRanges</a>
-    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
-    <span class="copy-feedback">Link copied!</span>
-  </h3>
-  <div class="option-description"><html><head></head><body><p>Range of open UDP ports.</p>
-</body></html></div>
-  <dl class="option-details">
-    <dt>Type</dt><dd class="option-value"><code>list of (submodule)</code></dd>
-    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span>&nbsp;<span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
-</body></html></dd>
-    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">{</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(86,182,194);">from</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(209,154,102);">60000</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgb(86,182,194);">to</span>&nbsp;<span style="color:rgb(171,178,191);">=</span>&nbsp;<span style="color:rgb(209,154,102);">61000</span><span style="color:rgb(132,139,152);">;</span><br>&nbsp;&nbsp;<span style="color:rgb(132,139,152);">}</span><br><span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
-</body></html></dd>
-  </dl>
-  <dl class="option-details option-sources">
-    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/providers/firewall" target="_blank" rel="noopener noreferrer">&lt;finix/modules/providers/firewall&gt;</a></code></dd>
-  </dl>
-</div>
-<div class="option" id="option-providers.firewall.allowedUDPPortRanges._.from">
-  <h3 class="option-name">
-    <a href="#option-providers.firewall.allowedUDPPortRanges._.from" class="option-anchor">providers.firewall.allowedUDPPortRanges.*.from</a>
-    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
-    <span class="copy-feedback">Link copied!</span>
-  </h3>
-  <div class="option-description"><html><head></head><body><p>The first port of the range, inclusive.</p>
-</body></html></div>
-  <dl class="option-details">
-    <dt>Type</dt><dd class="option-value"><code>16 bit unsigned integer; between 0 and 65535 (both inclusive)</code></dd>
   </dl>
   <dl class="option-details option-sources">
     <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/providers/firewall" target="_blank" rel="noopener noreferrer">&lt;finix/modules/providers/firewall&gt;</a></code></dd>

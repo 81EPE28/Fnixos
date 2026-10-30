@@ -1,3 +1,40 @@
+<div class="option" id="option-services.cron.settings.CONTENT_TRANSFER_ENCODING">
+  <h3 class="option-name">
+    <a href="#option-services.cron.settings.CONTENT_TRANSFER_ENCODING" class="option-anchor">services.cron.settings.CONTENT_TRANSFER_ENCODING</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The encoding for email notifications. This is useful for properly displaying special
+characters or when sending emails in a format other than plain text.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/cron" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/cron&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-services.cron.settings.CONTENT_TYPE">
+  <h3 class="option-name">
+    <a href="#option-services.cron.settings.CONTENT_TYPE" class="option-anchor">services.cron.settings.CONTENT_TYPE</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The MIME type and character encoding for the output of a cron job when it is sent
+via email. This allows the mail client to properly display the output, especially
+if it contains rich text or is not plain ASCII.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>null or string</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">null</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/cron" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/cron&gt;</a></code></dd>
+  </dl>
+</div>
 <div class="option" id="option-services.cron.settings.CRON_TZ">
   <h3 class="option-name">
     <a href="#option-services.cron.settings.CRON_TZ" class="option-anchor">services.cron.settings.CRON_TZ</a>
@@ -1771,39 +1808,5 @@ for additional details.</p>
   </dl>
   <dl class="option-details option-sources">
     <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/illum" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/illum&gt;</a></code></dd>
-  </dl>
-</div>
-<div class="option" id="option-services.incus.enable">
-  <h3 class="option-name">
-    <a href="#option-services.incus.enable" class="option-anchor">services.incus.enable</a>
-    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
-    <span class="copy-feedback">Link copied!</span>
-  </h3>
-  <div class="option-description"><html><head></head><body><p>Whether to enable <a href="https://linuxcontainers.org/incus">incus</a> as a system service.</p>
-</body></html></div>
-  <dl class="option-details">
-    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
-    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
-</body></html></dd>
-  </dl>
-  <dl class="option-details option-sources">
-    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/incus" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/incus&gt;</a></code></dd>
-  </dl>
-</div>
-<div class="option" id="option-services.incus.package">
-  <h3 class="option-name">
-    <a href="#option-services.incus.package" class="option-anchor">services.incus.package</a>
-    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
-    <span class="copy-feedback">Link copied!</span>
-  </h3>
-  <div class="option-description"><html><head></head><body><p>The package to use for <code>incus</code>.</p>
-</body></html></div>
-  <dl class="option-details">
-    <dt>Type</dt><dd class="option-value"><code>package</code></dd>
-    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(86,182,194);">incus-lts</span></code></pre></body></html>
-</body></html></dd>
-  </dl>
-  <dl class="option-details option-sources">
-    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/services/incus" target="_blank" rel="noopener noreferrer">&lt;finix/modules/services/incus&gt;</a></code></dd>
   </dl>
 </div>

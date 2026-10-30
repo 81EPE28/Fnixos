@@ -21,7 +21,7 @@
     <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
     <span class="copy-feedback">Link copied!</span>
   </h3>
-  <div class="option-description"><html><head></head><body><p>Whether to enable <a href="https://busybox.net/">ash</a> as a system shell.</p>
+  <div class="option-description"><html><head></head><body><p>Whether to enable ash as a system shell.</p>
 </body></html></div>
   <dl class="option-details">
     <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
@@ -42,7 +42,7 @@
 </body></html></div>
   <dl class="option-details">
     <dt>Type</dt><dd class="option-value"><code>package</code></dd>
-    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(86,182,194);">busybox</span></code></pre></body></html>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(171,178,191);">pkgsStatic</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(97,175,239);">busybox</span>&nbsp;<span style="color:rgb(132,139,152);">(</span><span style="color:rgb(97,175,239);">minimal</span>&nbsp;<span style="color:rgb(171,178,191);">ash</span><span style="color:rgb(132,139,152);">)</span></code></pre></body></html>
 </body></html></dd>
   </dl>
   <dl class="option-details option-sources">

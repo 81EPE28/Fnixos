@@ -1,3 +1,42 @@
+<div class="option" id="option-users.users._name_.packages">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.packages" class="option-anchor">users.users.&lt;name&gt;.packages</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>The set of packages that should be made available to the user.
+This is in contrast to <a class="option-reference" href="options.html#option-environment.systemPackages"><code class="nixos-option">environment.systemPackages</code></a>,
+which adds packages to all users.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>list of package</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span>&nbsp;<span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+    <dt>Example</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(132,139,152);">[</span>&nbsp;<span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(86,182,194);">firefox</span>&nbsp;<span style="color:rgb(171,178,191);">pkgs</span><span style="color:rgb(132,139,152);">.</span><span style="color:rgb(86,182,194);">thunderbird</span>&nbsp;<span style="color:rgb(132,139,152);">]</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
+<div class="option" id="option-users.users._name_.createHome">
+  <h3 class="option-name">
+    <a href="#option-users.users._name_.createHome" class="option-anchor">users.users.&lt;name&gt;.createHome</a>
+    <button type="button" class="copy-link" aria-label="Copy link to this option" title="Copy link to this option"></button>
+    <span class="copy-feedback">Link copied!</span>
+  </h3>
+  <div class="option-description"><html><head></head><body><p>Whether to create the home directory and ensure ownership as well as
+permissions to match the user.</p>
+</body></html></div>
+  <dl class="option-details">
+    <dt>Type</dt><dd class="option-value"><code>boolean</code></dd>
+    <dt>Default</dt><dd class="option-value"><html><head></head><body><html><head></head><body><pre class="highlight"><code class="language-nix"><span style="color:rgb(209,154,102);">false</span></code></pre></body></html>
+</body></html></dd>
+  </dl>
+  <dl class="option-details option-sources">
+    <dt>Declared in</dt><dd class="option-value"><code><a href="https://github.com/finix-community/finix/blob/main/modules/users/options.nix" target="_blank" rel="noopener noreferrer">&lt;finix/modules/users/options.nix&gt;</a></code></dd>
+  </dl>
+</div>
 <div class="option" id="option-users.users._name_.description">
   <h3 class="option-name">
     <a href="#option-users.users._name_.description" class="option-anchor">users.users.&lt;name&gt;.description</a>
