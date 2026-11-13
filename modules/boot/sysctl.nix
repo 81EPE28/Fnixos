@@ -13,7 +13,7 @@ let
         checkType = x: lib.isBool x || lib.isString x || lib.isInt x || x == null;
       in
       checkType val || (val._type or "" == "override" && checkType val.content);
-    merge = _loc: defs: lib.mergeOneOption _loc (lib.filterOverrides defs);
+    merge = loc: defs: lib.mergeOneOption loc (lib.filterOverrides defs);
   };
 in
 {
@@ -60,7 +60,7 @@ in
       `vm.swappiness`).  The value of each
       parameter may be a string, integer, boolean, or null
       (signifying the option will not appear at all).
-    ''';
+    '';
   };
 
   config = {
