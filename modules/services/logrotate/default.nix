@@ -8,7 +8,7 @@ let
   cfg = config.services.logrotate;
 
   rulesOpts =
-    { ... }:
+    _:
     {
       options = {
         enable = lib.mkOption {
