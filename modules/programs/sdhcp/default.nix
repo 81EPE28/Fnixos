@@ -3,7 +3,7 @@
 let
   cfg = config.programs.sdhcp;
 
-  sdhcpPkg = pkgs.stdenv.mkDerivation (finalAttrs: {
+  sdhcpPkg = pkgs.stdenv.mkDerivation (_finalAttrs: {
     pname = "sdhcp";
     version = "0.1-unstable-2018-11-22";
 
